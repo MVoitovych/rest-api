@@ -1,4 +1,6 @@
-from main import app
+from main import app, db
+from models import Fish
+
 
 @app.route('/')
 def index():
@@ -14,4 +16,7 @@ def get_fish():
 
 @app.route("/fish", methods = ["POST"])
 def post_fish():
-    return "Post fish"
+    fish = Fish(id=1, name="salmon", origin="Norway")
+    db.session.add(fish)
+    db.session.commit()
+    return "fish created"
